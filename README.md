@@ -2,7 +2,7 @@
 
 Internal AI tooling for a SaaS support organization.
 
-This project implements:
+This project implements two workflows:
 
 1. Ticket Triage Agent
 2. TAM (Technical Account Manager) Account Brief Generator
@@ -17,11 +17,11 @@ Built as part of the US Delivery Intern technical assessment.
 
 Given a support ticket, the system:
 
-- Classifies product area
-- Identifies issue category
-- Assigns urgency (P1–P4)
-- Retrieves relevant knowledge-base articles using RAG
-- Recommends the responder team
+- Classifies the product area
+- Identifies the issue category
+- Assigns an urgency tier (P1–P4)
+- Retrieves relevant knowledge-base content using RAG
+- Recommends the appropriate responder team
 - Generates a draft customer response
 
 ### TAM Account Brief Generator
@@ -39,7 +39,7 @@ Given an account ID, the system:
 ## Tech Stack
 
 - FastAPI
-- Groq LLM API
+- Groq API
 - SentenceTransformers
 - FAISS
 - Scikit-learn (TF-IDF fallback)
@@ -65,6 +65,7 @@ data/
 knowledge-base/
 eval/
 logs/
+ui/
 ```
 
 ---
@@ -77,17 +78,17 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
-Create environment file:
+Create a local environment file:
 
 ```bash
 cp .env.example .env
 ```
 
-Fill in your Groq API key:
+Configure your API key:
 
 ```env
 LLM_PROVIDER=groq
-GROQ_API_KEY=your_key_here
+GROQ_API_KEY=your_api_key
 ```
 
 Start the API:
@@ -143,15 +144,6 @@ Response:
 {
   "account_id": "ACC-3336",
   "company": "Omni Consumer Products",
-  "found": true,
-  "tickets_considered": 0
-}
-```
-
-Key account details from dataset:
-
-```json
-{
   "health_status": "At Risk",
   "usage_trend": "Inactive",
   "arr_usd": 500000,
@@ -163,7 +155,7 @@ Key account details from dataset:
 
 ## Evaluation
 
-Run:
+Run the evaluation harness:
 
 ```bash
 python -m eval.eval_harness
@@ -191,21 +183,21 @@ eval/eval_report.json
 
 ### Retrieval
 
-- Primary backend: SentenceTransformers + FAISS
-- Automatic fallback to TF-IDF if embeddings are unavailable
-- Backend selection is logged through observability events
+- SentenceTransformers embeddings with FAISS vector search
+- Automatic TF-IDF fallback when embeddings are unavailable
+- Retrieval backend selection is logged through observability events
 
 ### Account Briefs
 
 - Deterministic outputs for evaluation consistency
-- Evidence-backed risk flags only
-- Graceful handling of missing account records
+- Evidence-backed risk identification
+- Graceful handling of unknown account IDs
 
 ### LLM Layer
 
 - Provider abstraction through environment variables
 - Supports Groq, OpenAI, Gemini, and Mock providers
-- No application code changes required when switching providers
+- No code changes required when switching providers
 
 ### Observability
 
@@ -240,8 +232,16 @@ GET /account-brief/{account_id}
 
 ---
 
+## Loom Walkthrough
+
+Loom video: _Add link before submission_
+
+---
+
 ## Notes
 
 - Uses only the provided assessment datasets.
 - No external customer data is accessed.
 - Secrets are loaded from environment variables and are never committed to source control.
+- Required environment variables are documented in `.env.example`.
+- Evaluation outputs are included in `eval/eval_report.md` and `eval/eval_report.json`.
