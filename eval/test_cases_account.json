@@ -1,0 +1,59 @@
+[
+  {
+    "id": "account_01_valid_account_basic",
+    "description": "Any valid account with tickets should produce a non-empty, well-formed brief",
+    "selector": {"strategy": "first_with_tickets"},
+    "acceptance": {
+      "must_be_found": true,
+      "requires_nonempty_executive_summary": true,
+      "requires_min_talking_points": 1
+    }
+  },
+  {
+    "id": "account_02_churning_account_flags_risk",
+    "description": "An account with health_status='Churning' or negative escalation_notes should surface at least one quote-justified risk flag",
+    "selector": {"strategy": "by_health_status", "value": "Churning", "fallback_strategy": "has_escalation_notes"},
+    "acceptance": {
+      "must_be_found": true,
+      "requires_min_risk_flags": 1,
+      "requires_quotes_are_verbatim": true
+    }
+  },
+  {
+    "id": "account_03_healthy_account_low_noise",
+    "description": "A Healthy account with no negative escalation notes should not have fabricated risk flags",
+    "selector": {"strategy": "by_health_status", "value": "Healthy", "fallback_strategy": "first_with_tickets"},
+    "acceptance": {
+      "must_be_found": true,
+      "requires_nonempty_executive_summary": true
+    }
+  },
+  {
+    "id": "account_04_determinism",
+    "description": "Calling the same account_id twice must return a byte-identical brief (determinism requirement)",
+    "selector": {"strategy": "first_with_tickets"},
+    "acceptance": {
+      "must_be_found": true,
+      "requires_deterministic_repeat_call": true
+    }
+  },
+  {
+    "id": "account_05_no_recent_tickets",
+    "description": "An account with zero tickets in the last 90 days should still produce a brief, not error out",
+    "selector": {"strategy": "zero_recent_tickets", "fallback_strategy": "first_with_tickets"},
+    "acceptance": {
+      "must_be_found": true,
+      "requires_nonempty_executive_summary": true
+    }
+  },
+  {
+    "id": "account_06_adversarial_unknown_id",
+    "description": "ADVERSARIAL: account_id with no matching record (documented data gap) must be handled gracefully, not raise an exception",
+    "selector": {"strategy": "explicit_id", "value": "ACC-DOES-NOT-EXIST-99999"},
+    "acceptance": {
+      "must_be_found": false,
+      "must_not_error": true,
+      "requires_error_message": true
+    }
+  }
+]

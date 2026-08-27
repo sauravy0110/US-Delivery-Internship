@@ -1,0 +1,87 @@
+[
+  {
+    "id": "triage_01_clear_p1_outage",
+    "description": "Clear-cut critical outage should classify as P1 Bug/Integration with urgent draft response",
+    "input": {
+      "subject": "DataBridge Pro completely down for all users",
+      "body": "Our production DataBridge Pro Connectors pipeline is completely down. Error: ERR_CONNECTION_TIMEOUT after 30s. All 200 users in our organization are affected. This is a critical outage impacting our business operations."
+    },
+    "acceptance": {
+      "urgency_tier_in": ["P1"],
+      "issue_category_in": ["Bug", "Integration", "Performance"],
+      "requires_kb_match": true,
+      "requires_nonempty_draft_response": true
+    }
+  },
+  {
+    "id": "triage_02_billing_question",
+    "description": "Routine billing question should NOT be classified urgent",
+    "input": {
+      "subject": "Question about our latest invoice",
+      "body": "Hi, we noticed our invoice this month looks different from last month. Could someone confirm our current seat count and plan tier? Not urgent, just want to understand the numbers."
+    },
+    "acceptance": {
+      "urgency_tier_in": ["P3", "P4"],
+      "issue_category_in": ["Billing"],
+      "requires_kb_match": true,
+      "requires_nonempty_draft_response": true
+    }
+  },
+  {
+    "id": "triage_03_how_to_request",
+    "description": "How-to / documentation request, low urgency, should route to Tier-1",
+    "input": {
+      "subject": "How do I configure RBAC in SecureVault?",
+      "body": "Could someone point us to documentation on setting up custom roles in SecureVault Access Control? We're trying to set up our team permissions correctly."
+    },
+    "acceptance": {
+      "urgency_tier_in": ["P3", "P4"],
+      "issue_category_in": ["How-To"],
+      "requires_kb_match": true,
+      "requires_nonempty_draft_response": true
+    }
+  },
+  {
+    "id": "triage_04_feature_request",
+    "description": "Feature request should be categorised correctly and routed to Product Management, not urgent",
+    "input": {
+      "subject": "Bulk actions for WorkflowEngine approvals",
+      "body": "It would be great if WorkflowEngine supported bulk-approving multiple approval requests at once. Our team of 40 approvers does this one at a time today, which is slow but not blocking."
+    },
+    "acceptance": {
+      "urgency_tier_in": ["P3", "P4"],
+      "issue_category_in": ["Feature Request"],
+      "requires_kb_match": false,
+      "requires_nonempty_draft_response": true
+    }
+  },
+  {
+    "id": "triage_05_data_loss_urgent",
+    "description": "Explicit data loss language should trigger high urgency and Data Loss category",
+    "input": {
+      "subject": "Missing records after CloudSync backup",
+      "body": "We believe we've lost several files from our Finance folder after last night's CloudSync backup ran. This is critical, please advise urgently — we need these records for an audit tomorrow."
+    },
+    "acceptance": {
+      "urgency_tier_in": ["P1", "P2"],
+      "issue_category_in": ["Data Loss"],
+      "requires_kb_match": true,
+      "requires_nonempty_draft_response": true
+    }
+  },
+  {
+    "id": "triage_06_adversarial_ambiguous",
+    "description": "ADVERSARIAL: vague, low-context ticket with no clear product/category signal. Should still degrade gracefully to a valid enum value rather than crashing or returning an invalid category.",
+    "input": {
+      "subject": "it's not working again",
+      "body": "hey can someone look into this, its been happening on and off, thanks"
+    },
+    "acceptance": {
+      "urgency_tier_in": ["P1", "P2", "P3", "P4"],
+      "issue_category_in": ["Bug", "Feature Request", "How-To", "Performance", "Billing", "Integration", "Onboarding", "Data Loss"],
+      "requires_kb_match": false,
+      "requires_nonempty_draft_response": true,
+      "must_not_error": true
+    }
+  }
+]

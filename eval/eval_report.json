@@ -1,0 +1,438 @@
+{
+  "generated_at": "2026-08-27T13:18:25Z",
+  "duration_seconds": 56.97,
+  "task_1_triage": {
+    "summary": {
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "avg_quality_score": 0.993
+    },
+    "cases": [
+      {
+        "id": "triage_01_clear_p1_outage",
+        "description": "Clear-cut critical outage should classify as P1 Bug/Integration with urgent draft response",
+        "passed": true,
+        "quality_score": 0.993,
+        "checks": [
+          {
+            "check": "urgency_tier is a valid enum value",
+            "passed": true,
+            "detail": "P1"
+          },
+          {
+            "check": "issue_category is a valid enum value",
+            "passed": true,
+            "detail": "Bug"
+          },
+          {
+            "check": "urgency_tier in ['P1']",
+            "passed": true,
+            "detail": "P1"
+          },
+          {
+            "check": "issue_category in ['Bug', 'Integration', 'Performance']",
+            "passed": true,
+            "detail": "Bug"
+          },
+          {
+            "check": "has at least one KB match",
+            "passed": true,
+            "detail": 3
+          },
+          {
+            "check": "draft_first_response is non-empty/substantive",
+            "passed": true,
+            "detail": 499
+          },
+          {
+            "check": "LLM-as-judge: draft response quality >= 0.5",
+            "passed": true,
+            "detail": {
+              "professional": true,
+              "on_topic": true,
+              "score": 0.95,
+              "notes": "Professional and on\u2011topic; acknowledges the outage and error without adding any unfounded details."
+            }
+          }
+        ]
+      },
+      {
+        "id": "triage_02_billing_question",
+        "description": "Routine billing question should NOT be classified urgent",
+        "passed": true,
+        "quality_score": 0.993,
+        "checks": [
+          {
+            "check": "urgency_tier is a valid enum value",
+            "passed": true,
+            "detail": "P4"
+          },
+          {
+            "check": "issue_category is a valid enum value",
+            "passed": true,
+            "detail": "Billing"
+          },
+          {
+            "check": "urgency_tier in ['P3', 'P4']",
+            "passed": true,
+            "detail": "P4"
+          },
+          {
+            "check": "issue_category in ['Billing']",
+            "passed": true,
+            "detail": "Billing"
+          },
+          {
+            "check": "has at least one KB match",
+            "passed": true,
+            "detail": 3
+          },
+          {
+            "check": "draft_first_response is non-empty/substantive",
+            "passed": true,
+            "detail": 316
+          },
+          {
+            "check": "LLM-as-judge: draft response quality >= 0.5",
+            "passed": true,
+            "detail": {
+              "professional": true,
+              "on_topic": true,
+              "score": 0.95,
+              "notes": "Professional and directly addresses the request without adding unsupported details."
+            }
+          }
+        ]
+      },
+      {
+        "id": "triage_03_how_to_request",
+        "description": "How-to / documentation request, low urgency, should route to Tier-1",
+        "passed": true,
+        "quality_score": 0.993,
+        "checks": [
+          {
+            "check": "urgency_tier is a valid enum value",
+            "passed": true,
+            "detail": "P4"
+          },
+          {
+            "check": "issue_category is a valid enum value",
+            "passed": true,
+            "detail": "How-To"
+          },
+          {
+            "check": "urgency_tier in ['P3', 'P4']",
+            "passed": true,
+            "detail": "P4"
+          },
+          {
+            "check": "issue_category in ['How-To']",
+            "passed": true,
+            "detail": "How-To"
+          },
+          {
+            "check": "has at least one KB match",
+            "passed": true,
+            "detail": 3
+          },
+          {
+            "check": "draft_first_response is non-empty/substantive",
+            "passed": true,
+            "detail": 427
+          },
+          {
+            "check": "LLM-as-judge: draft response quality >= 0.5",
+            "passed": true,
+            "detail": {
+              "professional": true,
+              "on_topic": true,
+              "score": 0.95,
+              "notes": "Professional and directly addresses the request with appropriate documentation link, no fabricated information."
+            }
+          }
+        ]
+      },
+      {
+        "id": "triage_04_feature_request",
+        "description": "Feature request should be categorised correctly and routed to Product Management, not urgent",
+        "passed": true,
+        "quality_score": 0.993,
+        "checks": [
+          {
+            "check": "urgency_tier is a valid enum value",
+            "passed": true,
+            "detail": "P4"
+          },
+          {
+            "check": "issue_category is a valid enum value",
+            "passed": true,
+            "detail": "Feature Request"
+          },
+          {
+            "check": "urgency_tier in ['P3', 'P4']",
+            "passed": true,
+            "detail": "P4"
+          },
+          {
+            "check": "issue_category in ['Feature Request']",
+            "passed": true,
+            "detail": "Feature Request"
+          },
+          {
+            "check": "draft_first_response is non-empty/substantive",
+            "passed": true,
+            "detail": 490
+          },
+          {
+            "check": "LLM-as-judge: draft response quality >= 0.5",
+            "passed": true,
+            "detail": {
+              "professional": true,
+              "on_topic": true,
+              "score": 0.96,
+              "notes": "Professional and on\u2011topic; acknowledges the bulk\u2011approval request without adding any unsupported facts."
+            }
+          }
+        ]
+      },
+      {
+        "id": "triage_05_data_loss_urgent",
+        "description": "Explicit data loss language should trigger high urgency and Data Loss category",
+        "passed": true,
+        "quality_score": 0.993,
+        "checks": [
+          {
+            "check": "urgency_tier is a valid enum value",
+            "passed": true,
+            "detail": "P1"
+          },
+          {
+            "check": "issue_category is a valid enum value",
+            "passed": true,
+            "detail": "Data Loss"
+          },
+          {
+            "check": "urgency_tier in ['P1', 'P2']",
+            "passed": true,
+            "detail": "P1"
+          },
+          {
+            "check": "issue_category in ['Data Loss']",
+            "passed": true,
+            "detail": "Data Loss"
+          },
+          {
+            "check": "has at least one KB match",
+            "passed": true,
+            "detail": 3
+          },
+          {
+            "check": "draft_first_response is non-empty/substantive",
+            "passed": true,
+            "detail": 605
+          },
+          {
+            "check": "LLM-as-judge: draft response quality >= 0.5",
+            "passed": true,
+            "detail": {
+              "professional": true,
+              "on_topic": true,
+              "score": 0.95,
+              "notes": "The response is polite, addresses the missing Finance files after CloudSync backup, and does not introduce any unsupported facts."
+            }
+          }
+        ]
+      },
+      {
+        "id": "triage_06_adversarial_ambiguous",
+        "description": "ADVERSARIAL: vague, low-context ticket with no clear product/category signal. Should still degrade gracefully to a valid enum value rather than crashing or returning an invalid category.",
+        "passed": true,
+        "quality_score": 0.994,
+        "checks": [
+          {
+            "check": "urgency_tier is a valid enum value",
+            "passed": true,
+            "detail": "P3"
+          },
+          {
+            "check": "issue_category is a valid enum value",
+            "passed": true,
+            "detail": "Bug"
+          },
+          {
+            "check": "urgency_tier in ['P1', 'P2', 'P3', 'P4']",
+            "passed": true,
+            "detail": "P3"
+          },
+          {
+            "check": "issue_category in ['Bug', 'Feature Request', 'How-To', 'Performance', 'Billing', 'Integration', 'Onboarding', 'Data Loss']",
+            "passed": true,
+            "detail": "Bug"
+          },
+          {
+            "check": "draft_first_response is non-empty/substantive",
+            "passed": true,
+            "detail": 377
+          },
+          {
+            "check": "LLM-as-judge: draft response quality >= 0.5",
+            "passed": true,
+            "detail": {
+              "professional": true,
+              "on_topic": true,
+              "score": 0.96,
+              "notes": "Professional, on\u2011topic, and contains no fabricated details."
+            }
+          },
+          {
+            "check": "execution did not raise an exception",
+            "passed": true,
+            "detail": "ok"
+          }
+        ]
+      }
+    ]
+  },
+  "task_2_account_brief": {
+    "summary": {
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "avg_quality_score": 1.0
+    },
+    "cases": [
+      {
+        "id": "account_01_valid_account_basic",
+        "description": "Any valid account with tickets should produce a non-empty, well-formed brief",
+        "account_id_used": "ACC-3336",
+        "passed": true,
+        "quality_score": 1.0,
+        "checks": [
+          {
+            "check": "found == True",
+            "passed": true,
+            "detail": true
+          },
+          {
+            "check": "executive_summary is non-empty/substantive",
+            "passed": true,
+            "detail": "Omni Consumer Products is a $500K ARR account marked At Risk with inactive usage"
+          },
+          {
+            "check": ">= 1 talking points",
+            "passed": true,
+            "detail": 5
+          }
+        ]
+      },
+      {
+        "id": "account_02_churning_account_flags_risk",
+        "description": "An account with health_status='Churning' or negative escalation_notes should surface at least one quote-justified risk flag",
+        "account_id_used": "ACC-2944",
+        "passed": true,
+        "quality_score": 1.0,
+        "checks": [
+          {
+            "check": "found == True",
+            "passed": true,
+            "detail": true
+          },
+          {
+            "check": ">= 1 risk flags",
+            "passed": true,
+            "detail": 3
+          },
+          {
+            "check": "risk-flag quotes are verbatim from source data",
+            "passed": true,
+            "detail": "3 flag(s) checked"
+          }
+        ]
+      },
+      {
+        "id": "account_03_healthy_account_low_noise",
+        "description": "A Healthy account with no negative escalation notes should not have fabricated risk flags",
+        "account_id_used": "ACC-3033",
+        "passed": true,
+        "quality_score": 1.0,
+        "checks": [
+          {
+            "check": "found == True",
+            "passed": true,
+            "detail": true
+          },
+          {
+            "check": "executive_summary is non-empty/substantive",
+            "passed": true,
+            "detail": "Polaris Group is a healthy APAC energy customer with $120,000 ARR and an increas"
+          }
+        ]
+      },
+      {
+        "id": "account_04_determinism",
+        "description": "Calling the same account_id twice must return a byte-identical brief (determinism requirement)",
+        "account_id_used": "ACC-3336",
+        "passed": true,
+        "quality_score": 1.0,
+        "checks": [
+          {
+            "check": "found == True",
+            "passed": true,
+            "detail": true
+          },
+          {
+            "check": "repeat call returns identical output",
+            "passed": true,
+            "detail": "match"
+          }
+        ]
+      },
+      {
+        "id": "account_05_no_recent_tickets",
+        "description": "An account with zero tickets in the last 90 days should still produce a brief, not error out",
+        "account_id_used": "ACC-3336",
+        "passed": true,
+        "quality_score": 1.0,
+        "checks": [
+          {
+            "check": "found == True",
+            "passed": true,
+            "detail": true
+          },
+          {
+            "check": "executive_summary is non-empty/substantive",
+            "passed": true,
+            "detail": "Omni Consumer Products is a $500K ARR account marked At Risk with inactive usage"
+          }
+        ]
+      },
+      {
+        "id": "account_06_adversarial_unknown_id",
+        "description": "ADVERSARIAL: account_id with no matching record (documented data gap) must be handled gracefully, not raise an exception",
+        "account_id_used": "ACC-DOES-NOT-EXIST-99999",
+        "passed": true,
+        "quality_score": 1.0,
+        "checks": [
+          {
+            "check": "found == False",
+            "passed": true,
+            "detail": false
+          },
+          {
+            "check": "error field populated for missing account",
+            "passed": true,
+            "detail": "No account found with account_id='ACC-DOES-NOT-EXIST-99999'. Ticket/account_id references without a matching account are a known, documented data gap \u2014 handled gracefully rather than raising."
+          },
+          {
+            "check": "execution did not raise an exception",
+            "passed": true,
+            "detail": "ok"
+          }
+        ]
+      }
+    ]
+  }
+}
