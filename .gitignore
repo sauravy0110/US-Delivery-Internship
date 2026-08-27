@@ -20,6 +20,7 @@ __pycache__/
 # Test/cache artifacts
 .pytest_cache/
 .mypy_cache/
+logs/
 
 # Build artifacts
 build/
