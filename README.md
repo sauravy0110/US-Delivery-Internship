@@ -232,12 +232,6 @@ GET /account-brief/{account_id}
 
 ---
 
-## Loom Walkthrough
-
-Loom video: _Add link before submission_
-
----
-
 ## Notes
 
 - Uses only the provided assessment datasets.
